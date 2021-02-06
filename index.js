@@ -11,7 +11,7 @@ const mystyle = {
 
 ReactDom.render(
     document.getElementById('root'),
-    React.createElement(Navbar, {class:['test','test'], id: "id-nav"}),
+    React.createElement(Navbar, {class:['navbar','navbar-expand-lg', 'navbar-light', 'bg-light'], id: "id-nav"}),
     React.createElement("div", null, [
         React.createElement(Button, {class: 'test-button'}, null),
         React.createElement("div", {

@@ -26,11 +26,11 @@ export const React = {
                     element.addEventListener('submit', props[attribute]);
                 }
                 if (attribute === "class") {
-                    let className = ""
+                    let className = "";
                     if (Array.isArray(props[attribute])) {
                         props[attribute].forEach(classN => {
                             className = classN + ' ' + className
-                        })
+                        });
                         props[attribute] = className.substring(0, className.length - 1);
                     }
                 }

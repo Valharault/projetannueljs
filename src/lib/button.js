@@ -2,13 +2,18 @@ import Component from '../core/component.js';
 import {React} from "../core/reactDom.js";
 
 export class Button extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, children) {
+        super(props, children);
     }
 
     propTypes = {
         type: "object",
-        value: {class: "test-button"},
+        properties: {
+            class: {
+                type: "string",
+                enum: ["navbar-toggler", "test-button", "navbar-light", "bg-light"]
+            }
+        },
     };
 
     handleClick = () => {
@@ -17,13 +22,11 @@ export class Button extends Component {
 
 
     render() {
-        return React.createElement("div",  { class: this.props.class }  , [
-            React.createElement(
+
+            return React.createElement(
                 "button",
-                { onClick : () => this.handleClick() },
-                ["Ajouter"]
-            ),
-            React.createElement("span", { title: 'test' }, ["{{title}}"]),
-        ]);
+                { onClick : () => this.handleClick(), class:this.props.class, type:this.props.type},
+                ['Ajouter']
+            )
     }
 }

@@ -9,7 +9,7 @@ export class Navbar extends Component {
         properties: {
             class: {
                 type: "string",
-                enum: ["test", "nav-test"]
+                enum: ["navbar", "navbar-expand-lg", "navbar-light", "bg-light"]
             },
             id: {
                 type: "string",
@@ -25,11 +25,26 @@ export class Navbar extends Component {
     render() {
 
         return React.createElement("nav", {class: this.props.class, id: this.props.id}, [
-            React.createElement("img", {onClick: () => this.handleClick(), alt: 'navbar test', src: '/test.png'}, []),
-            React.createElement(Button, {class: 'test-button'}, [
-                React.createElement("span", {class: 'nav-span'}, [])
+            React.createElement("a", {class:'navbar-brand',href: '#',}, ['Navbar']),
+            React.createElement('button', {class: 'navbar-toggler', type: 'button'}, [
+                React.createElement("span", {class: 'navbar-toggler-icon'}, [])
             ]),
-            React.createElement(Button, {class: 'test-button'}, [])
+            React.createElement('div', {class: ['collapse', 'navbar-collapse'], id: 'navbarNav'}, [
+                React.createElement("ul", {class: 'navbar-nav'}, [
+                    React.createElement("li", {class: ['nav-item', 'active']}, [
+                        React.createElement("a", {class: 'nav-link', href: '#'}, [
+                            'Home', React.createElement("span", {class: 'sr-only'}, [
+                                '(current)'
+                            ])
+                        ])
+                    ]),
+                    React.createElement("li", {class: 'nav-item'}, [
+                        React.createElement("a", {class: 'nav-link', href: '#'}, [
+                            'Features'
+                        ])
+                    ])
+                ])
+            ])
         ])
     }
 }
