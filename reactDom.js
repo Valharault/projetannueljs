@@ -1,6 +1,8 @@
 export const ReactDom = {
-    render(elementReact, elementHtml) {
-        elementHtml.appendChild(elementReact);
+    render(elementHtml, ...elementsReact) {
+        elementsReact.forEach(elementReact => {
+            elementHtml.appendChild(elementReact);
+        })
     },
 };
 

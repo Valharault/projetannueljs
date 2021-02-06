@@ -1,6 +1,6 @@
-import Component from "./component";
-import {React} from "./reactDom";
-import {Button} from "./button";
+import Component from "./component.js";
+import {React} from "./reactDom.js";
+import {Button} from "./button.js";
 
 export class Navbar extends Component{
 

@@ -1,5 +1,5 @@
-import Component from './component';
-import {React} from "./reactDom";
+import Component from './component.js';
+import {React} from "./reactDom.js";
 
 
 export class Button extends Component {

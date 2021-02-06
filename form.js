@@ -1,6 +1,5 @@
-
-import Component from './component';
-import {React} from "./reactDom";
+import Component from './component.js';
+import {React} from "./reactDom.js";
 
 export class Form extends Component{
     constructor(props) {

@@ -1,22 +1,13 @@
-import {React, ReactDom} from './reactDom';
-import {Button} from "./button";
-import {Navbar} from "./navbar";
-import {Form} from "./form";
-
+import {React, ReactDom} from './reactDom.js';
+import {Button} from "./button.js";
+import {Navbar} from "./navbar.js";
+import {Form} from "./form.js";
 
 ReactDom.render(
+    document.getElementById('root'),
     React.createElement(Navbar),
-    document.getElementById('root-nav')
-);
-
-ReactDom.render(
-    React.createElement(Button,  {class: "test-buttdsdsfson" } ),
-    document.getElementById('root-button')
-);
-
-ReactDom.render(
+    React.createElement(Button, {class: "test-buttdsdsfson"}),
     React.createElement(Form),
-    document.getElementById('form')
 );
 
 
