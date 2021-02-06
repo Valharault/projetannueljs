@@ -1,7 +1,7 @@
 import Component from '../core/component.js';
 import {React} from "../core/reactDom.js";
 
-export class Button extends Component {
+export class Paragraph extends Component {
     constructor(props) {
         super(props);
     }
@@ -11,19 +11,16 @@ export class Button extends Component {
         properties: {
             class: {
                 type: "string",
-                enum: ["btn", "btn-success", "btn-error", "btn-sm", "btn-xl", "btn-md", "btn-info", "btn-primary"]
+                enum: ["text-white", "text-dark", "p-2"]
             }
-        },
+        }
     };
-
-    handleClick = () => {
-        alert('Ceci est un test');
-    };
-
 
     render() {
         return React.createElement(
-            "button"
+            "p",
+            {class: this.props.class},
+            this.props.text
         )
     }
 }
