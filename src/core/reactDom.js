@@ -12,18 +12,29 @@ export const React = {
      * @param {object} props
      * @param {Array} children
      */
-    createElement(tagOrElement, props, children) {
+    createElement(tagOrElement, props, children = null) {
         let element = null;
         if (typeof tagOrElement === 'string' || tagOrElement instanceof String) {
             element = document.createElement(tagOrElement);
 
             for (let attribute in props) {
+
                 if (attribute === "onClick") {
                     element.addEventListener('click', props[attribute]);
                 }
                 if (attribute === "onSubmit") {
                     element.addEventListener('submit', props[attribute]);
                 }
+                if (attribute === "class") {
+                    let className = ""
+                    if (Array.isArray(props[attribute])) {
+                        props[attribute].forEach(classN => {
+                            className = classN + ' ' + className
+                        })
+                        props[attribute] = className.substring(0, className.length - 1);
+                    }
+                }
+
                 element.setAttribute(attribute, props[attribute]);
             }
 
