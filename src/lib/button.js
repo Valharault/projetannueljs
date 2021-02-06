@@ -11,7 +11,7 @@ export class Button extends Component {
         properties: {
             class: {
                 type: "string",
-                enum: ["btn", "btn-success", "btn-error", "btn-sm", "btn-xl", "btn-md", "btn-info", "btn-primary"]
+                enum: ["btn", "btn-success", "btn-error", "btn-sm", "btn-xl", "btn-md", "btn-info", "btn-primary", "navbar-toggler"]
             }
         },
     };

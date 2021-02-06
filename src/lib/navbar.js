@@ -10,7 +10,7 @@ export class Navbar extends Component {
         properties: {
             class: {
                 type: "string",
-                enum: ['my-2', 'my-md-0','me-md-3']
+                enum: ['my-2', 'my-md-0','me-md-3', 'navbar', 'navbar-expand-lg', 'navbar-light', 'me-md-auto']
             }
         }
     };
@@ -20,11 +20,26 @@ export class Navbar extends Component {
     };
 
     render() {
-        return React.createElement("nav", {class: this.props.class}, [
-            React.createElement(Paragraph, {class: ['p-2', 'text-dark'], href: '#', text: 'Accueil'}),
-            React.createElement(Paragraph, {class: ['p-2', 'text-dark'], href: '#', text: 'Connexion'}),
-            React.createElement(Paragraph, {class: ['p-2', 'text-dark'], href: '#', text: 'Inscription'}),
-            React.createElement(Button, {class: 'btn'}, [])
+        return React.createElement("nav", {class: this.props.class, id: this.props.id}, [
+            React.createElement("a", {class: 'navbar-brand',href: '#',}, ['Navbar']),
+            React.createElement(Button, {class: 'navbar-toggler', type: 'button'}, [
+                React.createElement("span", {class: 'navbar-toggler-icon'}, [])
+            ]),
+            React.createElement('div', {class: ['navbar-collapse'], id: 'navbarNav'}, [
+                React.createElement("ul", {class: 'navbar-nav'}, [
+                    React.createElement("li", {class: ['nav-item', 'active']}, [
+                        React.createElement("a", {class: 'nav-link', href: '#'}, [
+                            'Home', React.createElement("span", {class: 'sr-only'}, [])
+                        ])
+                    ]),
+                    React.createElement("li", {class: 'nav-item'}, [
+                        React.createElement("a", {class: 'nav-link', href: '#'}, [
+                            'Features'
+                        ])
+                    ])
+                ])
+            ])
         ])
+
     }
 }
