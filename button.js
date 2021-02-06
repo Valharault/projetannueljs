@@ -8,7 +8,8 @@ export class Button extends Component {
     }
 
     propTypes = {
-        class: { type: "string", enum: ["button", "test-button", "tb"] }
+        type: "object",
+        value: { class: "test-button"} ,
     };
 
     handleClick = () => {

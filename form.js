@@ -12,7 +12,7 @@ export class Form extends Component{
 
     render() {
         return React.createElement(
-            "form", {onSubmit : () => this.onSubmit(), class:'form-js', id:'form-id'}, [
+            "form", {onSubmit : () => this.onSubmit(), class:'form-js', id:'form-id', style:this.props.style}, [
                 React.createElement('div', {}, [
                     React.createElement('label', {for:'name'}, [
                         "Nom :"

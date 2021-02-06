@@ -38,9 +38,7 @@ export const React = {
             }
         } else if (isClass(tagOrElement)){
                 const component = new tagOrElement(props, children);
-
                 if (component.propTypes) {
-                    console.log(type_check(props, component.propTypes));
                     if(!type_check(props, component.propTypes)) {
                         throw new TypeError();
                     }
@@ -62,43 +60,52 @@ function isClass(func) {
 
 
 
-function type_check_v1(arg, type) {
-    switch (typeof arg) {
+function type_check_v1(variable, type) {
+    const typeOfVariable = typeof variable;
+
+    switch (typeOfVariable) {
         case "object":
             switch (type) {
                 case "null":
-                    return arg === null;
+                    return variable === null;
                 case "array":
-                    return Array.isArray(arg);
+                    return Array.isArray(variable);
+                case "object":
+                    return variable !== null && !Array.isArray(variable);
                 default:
-                    return arg !== null && !Array.isArray(arg);
+                    return false;
             }
         default:
-            return arg === type;
+            return typeOfVariable === type;
     }
 }
 
-function type_check_v2(arg, object) {
-    for (let item in object) {
-        switch (item) {
-            case 'type':
-                if (!type_check_v1(arg, object.type)) return false;
+function type_check_v2(variable, conf) {
+    for (let key in conf) {
+        switch (key) {
+            case "type":
+                if (!type_check_v1(variable, conf.type)) return false;
                 break;
-            case 'value':
-                if (arg !== object.value) return false;
+            case "value":
+                if (JSON.stringify(variable) !== JSON.stringify(conf.value))
+                    return false;
                 break;
-            case 'enum':
-                let found = false;
-                for (value of object.enum) {
-                    found = type_check_v2(arg, {value: value})
-                    if (found) break;
+            //
+            case "enum":
+                enum_loop: {
+                    for (let subValue of conf.enum) {
+                        if (type_check_v2(variable, { value: subValue })) {
+                            break enum_loop;
+                        }
+                    }
+                    return false;
                 }
-                if (!found) return false
-                break
         }
     }
+
     return true;
 }
+
 
 function type_check(object, conf) {
     let check = type_check_v2(object, conf);
@@ -112,4 +119,44 @@ function type_check(object, conf) {
 
 
 
+
+// Jeu de tests pour type_check
+console.log(type_check(1, { type: "number", value: 1 }) === true);
+console.log(type_check(1, { type: "number", value: 3 }) === false);
+console.log(type_check(1, { type: "object", value: 1 }) === false);
+console.log(
+    type_check("string", { type: "string", enum: ["string1", "string2"] }) ===
+    false
+);
+console.log(
+    type_check({ bar: "foo" }, { type: "object", value: { bar: "foo" } }) === true
+);
+console.log(
+    type_check({ bar: "foo" }, { type: "object", value: { bar: "value" } }) ===
+    false
+);
+console.log(
+    type_check(
+        {
+            toto: {
+                fi: 3,
+                fa: {
+                    trim: " test ",
+                },
+            },
+        },
+        {
+            type: "object",
+            properties: {
+                toto: {
+                    type: "object",
+                    properties: {
+                        fi: { value: 3 },
+                        fa: { enum: [3, "string", { trim: " test " }] },
+                    },
+                },
+            },
+        }
+    ) === true
+);
 
