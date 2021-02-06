@@ -9,7 +9,7 @@ export class Navbar extends Component {
         properties: {
             class: {
                 type: "string",
-                enum: ["test-nav", "nav-test"]
+                enum: ["test", "nav-test"]
             },
             id: {
                 type: "string",
@@ -23,6 +23,7 @@ export class Navbar extends Component {
     };
 
     render() {
+
         return React.createElement("nav", {class: this.props.class, id: this.props.id}, [
             React.createElement("img", {onClick: () => this.handleClick(), alt: 'navbar test', src: '/test.png'}, []),
             React.createElement(Button, {class: 'test-button'}, [

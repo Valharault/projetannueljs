@@ -49,13 +49,22 @@ export const React = {
             const component = new tagOrElement(props, children);
 
             if (component.propTypes) {
-                console.log(component.propTypes)
-                if (!type_check(props, component.propTypes)) {
-                    throw new TypeError();
+                if (Array.isArray(props.class)) {
+                    if (component.propTypes.properties) {
+                        props.class.forEach((item, index) => {
+                            if (!type_check(item, component.propTypes.properties.class)) {
+                                throw new TypeError();
+                            }
+                        })
+                    }
+                } else {
+                    if (!type_check(props, component.propTypes)) {
+                        throw new TypeError();
+                    }
                 }
             }
-
             return component.display(props);
+
 
         }
         return element;
@@ -98,7 +107,7 @@ function type_check_v2(variable, conf) {
                 break;
             case "enum":
                 enum_loop: {
-                    for (subValue of conf.enum) {
+                    for (let subValue of conf.enum) {
                         if (type_check_v2(variable, {value: subValue})) {
                             break enum_loop;
                         }
