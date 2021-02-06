@@ -1,6 +1,5 @@
-import Component from './component.js';
-import {React} from "./reactDom.js";
-
+import Component from '../core/component.js';
+import {React} from "../core/reactDom.js";
 
 export class Button extends Component {
     constructor(props) {
@@ -8,7 +7,7 @@ export class Button extends Component {
     }
 
     propTypes = {
-        class: { type: "string", enum: ["button", "test-button", "tb"] }
+        class: {type: "string", enum: ["button", "test-button", "tb"]}
     };
 
     handleClick = () => {
@@ -21,11 +20,9 @@ export class Button extends Component {
             React.createElement(
                 "button",
                 { onClick : () => this.handleClick() },
-                ["Add"]
+                ["Ajouter"]
             ),
             React.createElement("span", { title: 'test' }, ["{{title}}"]),
         ]);
     }
-
-
 }

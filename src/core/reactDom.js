@@ -29,24 +29,33 @@ export const React = {
 
             for (let subElement of children) {
                 if (typeof subElement === "string") {
+                    let match = subElement.match(/{{[^ ]*}}/g)
+                    if (match !== null) {
+                        match.forEach(match => {
+                            let matchClear = match.replace(/[{}]/g, "");
+                            if (prop_access(props, matchClear)) {
+                                subElement = subElement.replace(match, prop_access(props, matchClear))
+                            }
+                        });
+                    }
                     subElement = document.createTextNode(
-                        subElement /*.interpolate(props)*/
+                        subElement
                     );
                 }
 
                 element.appendChild(subElement);
             }
-        } else if (isClass(tagOrElement)){
-                const component = new tagOrElement(props, children);
+        } else if (isClass(tagOrElement)) {
+            const component = new tagOrElement(props, children);
 
-                if (component.propTypes) {
-                    console.log(type_check(props, component.propTypes));
-                    if(!type_check(props, component.propTypes)) {
-                        throw new TypeError();
-                    }
+            if (component.propTypes) {
+                console.log(component.propTypes)
+                if (!type_check(props, component.propTypes)) {
+                    throw new TypeError();
                 }
+            }
 
-                return component.display(props);
+            return component.display(props);
 
         }
         return element;
@@ -54,13 +63,10 @@ export const React = {
 };
 
 
-
 function isClass(func) {
     return typeof func === 'function'
         && /^class\s/.test(Function.prototype.toString.call(func));
 }
-
-
 
 function type_check_v1(arg, type) {
     switch (typeof arg) {
@@ -70,33 +76,38 @@ function type_check_v1(arg, type) {
                     return arg === null;
                 case "array":
                     return Array.isArray(arg);
-                default:
+                case "object":
                     return arg !== null && !Array.isArray(arg);
+                default:
+                    return false;
             }
         default:
-            return arg === type;
+            return typeof arg === type;
     }
 }
 
-function type_check_v2(arg, object) {
-    for (let item in object) {
-        switch (item) {
-            case 'type':
-                if (!type_check_v1(arg, object.type)) return false;
+function type_check_v2(variable, conf) {
+    for (let key in conf) {
+        switch (key) {
+            case "type":
+                if (!type_check_v1(variable, conf.type)) return false;
                 break;
-            case 'value':
-                if (arg !== object.value) return false;
+            case "value":
+                if (JSON.stringify(variable) !== JSON.stringify(conf.value))
+                    return false;
                 break;
-            case 'enum':
-                let found = false;
-                for (value of object.enum) {
-                    found = type_check_v2(arg, {value: value})
-                    if (found) break;
+            case "enum":
+                enum_loop: {
+                    for (subValue of conf.enum) {
+                        if (type_check_v2(variable, {value: subValue})) {
+                            break enum_loop;
+                        }
+                    }
+                    return false;
                 }
-                if (!found) return false
-                break
         }
     }
+
     return true;
 }
 
@@ -110,6 +121,21 @@ function type_check(object, conf) {
     return check;
 }
 
-
-
-
+function prop_access(object, path) {
+    if (typeof path !== "string" || path === "" || typeof object !== "object") return object;
+    if (object === null) {
+        return false;
+    }
+    let items = path.split(".");
+    let result = object;
+    let buildPath = "";
+    for (let element in items) {
+        result = result[items[element]];
+        if (element > 0) buildPath += ".";
+        buildPath += items[element];
+        if (result === undefined || result === null) {
+            return false;
+        }
+    }
+    return result;
+}

@@ -1,13 +1,13 @@
-import Component from './component.js';
-import {React} from "./reactDom.js";
+import Component from '../core/component.js';
+import {React} from "../core/reactDom.js";
 
-export class Form extends Component{
+export class Form extends Component {
     constructor(props) {
         super(props);
     }
 
     onSubmit = () => {
-        alert('Voulez vous soumettre le valeur avec un email = ' +document.getElementById("mail").value)
+        alert('Voulez vous soumettre le valeur avec un email = ' + document.getElementById("mail").value)
     };
 
     render() {
