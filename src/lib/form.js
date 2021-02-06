@@ -1,10 +1,23 @@
 import Component from '../core/component.js';
 import {React} from "../core/reactDom.js";
+import {Button} from "./button.js";
+import {Input} from "./Input.js";
 
 export class Form extends Component {
     constructor(props) {
         super(props);
     }
+
+    propTypes = {
+        type: "object",
+        properties: {
+            class: {
+                type: "string",
+                enum: ['form']
+            }
+        }
+    };
+
 
     onSubmit = () => {
         alert('Voulez vous soumettre le valeur avec un email = ' + document.getElementById("mail").value)
@@ -12,26 +25,42 @@ export class Form extends Component {
 
     render() {
         return React.createElement(
-            "form", {onSubmit: () => this.onSubmit(), class: 'form-js', id: 'form-id', style: this.props.style}, [
-                React.createElement('div', {}, [
-                    React.createElement('label', {for: 'name'}, [
-                        "Nom :"
-                    ]),
-                    React.createElement('input', {type: 'text', id: 'name', name: 'user_name'}, [])
+            "form", {class: this.props.class, id: this.props.id}, [
+                React.createElement('div', {class: 'mb-3'}, [
+                    React.createElement('label', {for: 'username', class: 'form-label', text: "Nom d'utilisateur :"}),
+                    React.createElement(Input, {
+                        type: 'text',
+                        id: 'username',
+                        name: 'username',
+                        class: 'form-control'
+                    })
                 ]),
-                React.createElement('div', {}, [
-                    React.createElement('label', {for: 'mail'}, [
-                        "Mail :"
-                    ]),
-                    React.createElement('input', {type:'email', id:'mail', name:'user_mail'}, [])
+                React.createElement('div', {class: 'mb-3'}, [
+                    React.createElement('label', {for: 'email', class: 'form-label'}, ["Email :"]),
+                    React.createElement(Input, {type: 'email', id: 'email', name: 'email', class: 'form-control'}, [])
                 ]),
-                React.createElement('div', {}, [
-                    React.createElement('label', {for:'msg'}, [
-                        "Message :"
-                    ]),
-                    React.createElement('textarea', {id:'msg', name:'user_message'}, [])
+                React.createElement('div', {class: 'mb-3'}, [
+                    React.createElement('label', {for: 'password', class: 'form-label'}, ["Mot de passe :"]),
+                    React.createElement(Input, {
+                        type: 'password',
+                        id: 'password',
+                        name: 'password',
+                        class: 'form-control'
+                    }, [])
                 ]),
-                React.createElement('button', {type:'submit'}, ['Envoyer'])
+                React.createElement('div', {class: 'mb-3'}, [
+                    React.createElement('label', {
+                        for: 'password_confirm',
+                        class: 'form-label'
+                    }, ["Confirmer mot de passe :"]),
+                    React.createElement(Input, {
+                        type: 'password',
+                        id: 'password_confirm',
+                        name: 'password_confirm',
+                        class: 'form-control'
+                    }, [])
+                ]),
+                React.createElement(Button, {class: ['btn', 'btn-success'], type: 'submit'}, ['Envoyer'])
             ]
         )
     }

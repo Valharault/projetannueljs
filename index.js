@@ -11,14 +11,15 @@ const mystyle = {
 
 ReactDom.render(
     document.getElementById('root'),
-    React.createElement("div", null, [
-        React.createElement(Button, {class: 'btn'}, null),
-        React.createElement("div", {
-                prenom: {
-                    origine: 'France',
-                    appelation: 'Jean'
-                }
-            },
-            ["Bonjour, mon prénom vient de {{prenom.origine}} et je m'appelle {{prenom.appelation}}"]),
+    React.createElement('header', {class: ['d-flex', 'flex-column', 'flex-md-row', 'align-items-center', 'p-3', 'px-md-4', 'mb-3', 'bg-white', 'border-bottom', 'shadow-sm']}, [
+        React.createElement('p', {class: ['h5', 'my-0', 'me-md-auto', 'fw-normal']}, ['Projet Annuel JS']),
+        React.createElement(Navbar, {class: ['my-2', 'my-md-0', 'me-md-3']}),
     ]),
+    React.createElement('body', {class: 'bg-light'}, [
+        React.createElement('div', {class: 'container'}, [
+            React.createElement('div', {class: 'row'}, [
+                React.createElement(Form, {class: 'form'}, null),
+            ])
+        ]),
+    ])
 );

@@ -5,57 +5,81 @@ export const ReactDom = {
         })
     },
 };
+const allowedAttributes = [
+    'id',
+    'name',
+    'for',
+    'input',
+    'onClick',
+    'onSubmit',
+    'class',
+    'href',
+    'text',
+    'value',
+    'placeholder'
+]
 
 export const React = {
+
+
     /**
      * @param {String|ReactElement} tagOrElement
      * @param {object} props
      * @param {Array} children
      */
-    createElement(tagOrElement, props, children) {
+    createElement(tagOrElement, props, children = null) {
         let element = null;
         if (typeof tagOrElement === 'string' || tagOrElement instanceof String) {
             element = document.createElement(tagOrElement);
 
             for (let attribute in props) {
-                if (attribute === "onClick") {
-                    element.addEventListener('click', props[attribute]);
-                }
-                if (attribute === "onSubmit") {
-                    element.addEventListener('submit', props[attribute]);
+                if (allowedAttributes.includes(attribute)) {
+                    if (attribute === "onClick") {
+                        element.addEventListener('click', props[attribute]);
+                    } else if (attribute === "onSubmit") {
+                        element.addEventListener('submit', props[attribute]);
+                    } else if (attribute === "class") {
+                        let className = ""
+                        if (Array.isArray(props[attribute])) {
+                            props[attribute].forEach(classN => {
+                                className = classN + ' ' + className
+                            })
+                            props[attribute] = className.substring(0, className.length - 1);
+                        }
+                    } else if (attribute === "text") {
+                        element.innerHTML = props[attribute]
+                    }
                 }
                 element.setAttribute(attribute, props[attribute]);
             }
-
-            for (let subElement of children) {
-                if (typeof subElement === "string") {
-                    let match = subElement.match(/{{[^ ]*}}/g)
-                    if (match !== null) {
-                        match.forEach(match => {
-                            let matchClear = match.replace(/[{}]/g, "");
-                            if (prop_access(props, matchClear)) {
-                                subElement = subElement.replace(match, prop_access(props, matchClear))
-                            }
-                        });
+            if (children !== null){
+                for (let subElement of children) {
+                    if (typeof subElement === "string") {
+                        subElement = document.createTextNode(
+                            subElement.interpolate(props)
+                        );
                     }
-                    subElement = document.createTextNode(
-                        subElement
-                    );
+                    element.appendChild(subElement);
                 }
-
-                element.appendChild(subElement);
             }
+
         } else if (isClass(tagOrElement)) {
             const component = new tagOrElement(props, children);
-
             if (component.propTypes) {
-                console.log(component.propTypes)
-                if (!type_check(props, component.propTypes)) {
-                    throw new TypeError();
+                if (Array.isArray(props.class)) {
+                    if (component.propTypes.properties) {
+                        props.class.forEach((item, index) => {
+                            type_check(item, component.propTypes.properties.class)
+                        })
+                    }
+                } else {
+                    if (!type_check(props, component.propTypes)) {
+                        throw new TypeError();
+                    }
                 }
             }
-
             return component.display(props);
+
 
         }
         return element;
@@ -116,7 +140,9 @@ function type_check(object, conf) {
     if (!conf.properties) return check;
     for (const typeKey in conf.properties) {
         check = type_check(type_check_v1(object, 'object') ? object[typeKey] : object, conf.properties[typeKey]);
-        if (!check) break
+        if (!check) {
+            throw new TypeError("Classe non autorisé sur le composant => " + conf.properties[typeKey].enum);
+        }
     }
     return check;
 }
@@ -138,4 +164,18 @@ function prop_access(object, path) {
         }
     }
     return result;
+}
+
+String.prototype.interpolate = function (props) {
+    let subElement = this
+    let match = subElement.match(/{{[^ ]*}}/g)
+    if (match !== null) {
+        match.forEach(match => {
+            let matchClear = match.replace(/[{}]/g, "");
+            if (prop_access(props, matchClear)) {
+                subElement = subElement.replace(match, prop_access(props, matchClear))
+            }
+        });
+    }
+    return subElement
 }
