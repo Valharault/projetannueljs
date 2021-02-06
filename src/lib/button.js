@@ -23,8 +23,7 @@ export class Button extends Component {
 
     render() {
         return React.createElement(
-            "button",
-            this.props
+            "button"
         )
     }
 }
