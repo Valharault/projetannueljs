@@ -12,15 +12,15 @@ export class Form extends Component {
 
     render() {
         return React.createElement(
-            "form", {onSubmit : () => this.onSubmit(), class:'form-js', id:'form-id'}, [
+            "form", {onSubmit: () => this.onSubmit(), class: 'form-js', id: 'form-id', style: this.props.style}, [
                 React.createElement('div', {}, [
-                    React.createElement('label', {for:'name'}, [
+                    React.createElement('label', {for: 'name'}, [
                         "Nom :"
                     ]),
-                    React.createElement('input', {type:'text', id:'name', name:'user_name'}, [])
+                    React.createElement('input', {type: 'text', id: 'name', name: 'user_name'}, [])
                 ]),
                 React.createElement('div', {}, [
-                    React.createElement('label', {for:'mail'}, [
+                    React.createElement('label', {for: 'mail'}, [
                         "Mail :"
                     ]),
                     React.createElement('input', {type:'email', id:'mail', name:'user_mail'}, [])

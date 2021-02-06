@@ -73,7 +73,7 @@ function type_check_v1(arg, type) {
         case "object":
             switch (type) {
                 case "null":
-                    return arg === null;
+                    return variable === null;
                 case "array":
                     return Array.isArray(arg);
                 case "object":
