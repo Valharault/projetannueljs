@@ -8,7 +8,12 @@ export class Button extends Component {
 
     propTypes = {
         type: "object",
-        value: {class: "test-button"},
+        properties: {
+            class: {
+                type: "string",
+                enum: ["btn", "btn-success"]
+            }
+        },
     };
 
     handleClick = () => {
@@ -22,8 +27,7 @@ export class Button extends Component {
                 "button",
                 { onClick : () => this.handleClick() },
                 ["Ajouter"]
-            ),
-            React.createElement("span", { title: 'test' }, ["{{title}}"]),
+            )
         ]);
     }
 }

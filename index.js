@@ -12,13 +12,13 @@ const mystyle = {
 ReactDom.render(
     document.getElementById('root'),
     React.createElement("div", null, [
-        React.createElement(Button, {class: 'test-button'}, null),
+        React.createElement(Button, {class: 'btn'}, null),
         React.createElement("div", {
                 prenom: {
                     origine: 'France',
                     appelation: 'Jean'
                 }
-            }
-            , ["Bonjour, mon prénom vient de {{prenom.origine}} et je m'appelle {{prenom.appelation}}"]),
+            },
+            ["Bonjour, mon prénom vient de {{prenom.origine}} et je m'appelle {{prenom.appelation}}"]),
     ]),
 );

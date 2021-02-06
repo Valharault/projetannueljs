@@ -98,7 +98,7 @@ function type_check_v2(variable, conf) {
                 break;
             case "enum":
                 enum_loop: {
-                    for (subValue of conf.enum) {
+                    for (let subValue of conf.enum) {
                         if (type_check_v2(variable, {value: subValue})) {
                             break enum_loop;
                         }
