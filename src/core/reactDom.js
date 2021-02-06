@@ -49,8 +49,8 @@ export const React = {
                     } else if (attribute === "text") {
                         element.innerHTML = props[attribute]
                     }
+                    element.setAttribute(attribute, props[attribute]);
                 }
-                element.setAttribute(attribute, props[attribute]);
             }
             if (children !== null){
                 for (let subElement of children) {
