@@ -167,8 +167,8 @@ function prop_access(object, path) {
 }
 
 String.prototype.interpolate = function (props) {
-    let subElement = this
-    let match = subElement.match(/{{[^ ]*}}/g)
+    let subElement = this;
+    let match = subElement.match(/{{[^ ]*}}/g);
     if (match !== null) {
         match.forEach(match => {
             let matchClear = match.replace(/[{}]/g, "");
@@ -178,4 +178,19 @@ String.prototype.interpolate = function (props) {
         });
     }
     return subElement
+};
+
+/*if (location.href === 'http://localhost/projetannueljs/') {
+    window.history.pushState('index', 'projetAnnuel', null);
 }
+
+
+window.addEventListener('popstate', function(event) {
+
+    console.log(event.state)
+    if (event.state === 'home') {
+        window.history.back();
+
+    }
+
+}, false);*/

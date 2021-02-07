@@ -6,6 +6,7 @@ export class Input extends Component {
         super(props);
     }
 
+
     propTypes = {
         type: "object",
         properties: {

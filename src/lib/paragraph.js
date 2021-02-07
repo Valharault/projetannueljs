@@ -6,6 +6,7 @@ export class Paragraph extends Component {
         super(props);
     }
 
+
     propTypes = {
         type: "object",
         properties: {

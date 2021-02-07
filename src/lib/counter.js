@@ -14,6 +14,7 @@ export class Counter extends Component {
         defaultValue: { type: "number" },
     };
 
+
     setState = () => {
         this.state.counter = this.state.counter + 1;
         document.getElementById('root').removeChild(document.getElementById('root').lastChild);
