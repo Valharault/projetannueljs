@@ -28,17 +28,15 @@ let React = {
   },
 };
 
-class HelloWorld extends Component {
-  propTypes = {
-    name: { type: "string", enum: ["world", "you", "me"] },
-  };
-
-  render() {
-    return React.createElement("div", { toWhat: { name: this.props.name } }, [
-      "Hello {{toWhat.name}}",
-    ]);
-  }
-}
+ReactDOM.render(
+  React.createElement("div", { toWhat: { name: "World" } }, [
+    "Hello {{toWhat.name}}",
+    React.createElement(HelloWorld, { name: "world" }),
+    React.createElement(Counter, { defaultValue: 10 }),
+    React.createElement(Counter, { defaultValue: 0 }),
+  ]),
+  document.getElementById("root")
+);
 
 class Component {
   state = {};
@@ -51,6 +49,19 @@ class Component {
   }
   render() {}
 }
+
+class HelloWorld extends Component {
+  propTypes = {
+    name: { type: "string", enum: ["world", "you", "me"] },
+  };
+
+  render() {
+    return React.createElement("div", { toWhat: { name: this.props.name } }, [
+      "Hello {{toWhat.name}}",
+    ]);
+  }
+}
+
 
 class Counter extends Component {
   constructor(props) {
@@ -99,12 +110,3 @@ class Router extends Component {
   }
 }
 
-ReactDOM.render(
-  React.createElement("div", { toWhat: { name: "World" } }, [
-    "Hello {{toWhat.name}}",
-    React.createElement(HelloWorld, { name: "world" }),
-    React.createElement(Counter, { defaultValue: 10 }),
-    React.createElement(Counter, { defaultValue: 0 }),
-  ]),
-  document.getElementById("root")
-);
