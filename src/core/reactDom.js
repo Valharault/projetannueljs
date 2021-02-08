@@ -38,7 +38,14 @@ export const React = {
                         element.addEventListener('click', props[attribute]);
                     } else if (attribute === "onSubmit") {
                         element.addEventListener('submit', props[attribute]);
-                    } else if (attribute === "class") {
+                    } else if (attribute === 'href') {
+                        element.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            handleHref(props[attribute]);
+                        });
+                    }
+
+                    else if (attribute === "class") {
                         let className = ""
                         if (Array.isArray(props[attribute])) {
                             props[attribute].forEach(classN => {
@@ -183,17 +190,27 @@ String.prototype.interpolate = function (props) {
     return subElement
 };
 
-/*if (location.href === 'http://localhost/projetannueljs/') {
-    window.history.pushState('index', 'projetAnnuel', null);
+function handleHref(attribute) {
+
+    console.log(window.location.href);
+    if (attribute != window.location.href) {
+        window.history.pushState({attribute}, `${attribute}`, `${attribute}`);
+        //trigger update components
+    }
+
+
+
 }
 
 
-window.addEventListener('popstate', function(event) {
+window.addEventListener("popstate", event => {
+    // Grab the history state id
+    let stateId = event.state;
 
-    console.log(event.state)
-    if (event.state === 'home') {
-        window.history.back();
-
+    if (event.state != null) {
+            stateId = event.state.attribute
     }
+    console.log(stateId);
 
-}, false);*/
+
+});
