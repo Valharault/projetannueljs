@@ -1,24 +1,25 @@
 import Component from '../core/component.js';
 import {React} from "../core/reactDom.js";
 
-export class Button extends Component {
+export class Input extends Component {
     constructor(props) {
         super(props);
     }
+
 
     propTypes = {
         type: "object",
         properties: {
             class: {
                 type: "string",
-                enum: ["btn", "btn-success", "btn-error", "btn-sm", "btn-xl", "btn-md", "btn-info", "btn-primary", "navbar-toggler"]
+                enum: ["form-control"]
             }
         },
     };
 
     render() {
         return React.createElement(
-            "button",
+            "input",
             this.props
         )
     }

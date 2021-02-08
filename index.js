@@ -1,24 +1,11 @@
-import {React, ReactDom} from './src/core/reactDom.js';
-import {Button} from "./src/lib/button.js";
-import {Navbar} from "./src/lib/navbar.js";
-import {Form} from "./src/lib/form.js";
+import {Router} from './src/core/router.js';
 
-const mystyle = {
-    backgroundColor: "DodgerBlue",
-    padding: "10px",
-    fontFamily: "Arial"
-};
+Router.route(window.location.search);
 
-ReactDom.render(
-    document.getElementById('root'),
-    React.createElement("div", null, [
-        React.createElement(Button, {class: 'test-button'}, null),
-        React.createElement("div", {
-                prenom: {
-                    origine: 'France',
-                    appelation: 'Jean'
-                }
-            }
-            , ["Bonjour, mon prénom vient de {{prenom.origine}} et je m'appelle {{prenom.appelation}}"]),
-    ]),
-);
+window.addEventListener("popstate", event => {
+    let stateId = event.state;
+    if (event.state != null) {
+        stateId = event.state.path
+    }
+    Router.route(stateId);
+});
