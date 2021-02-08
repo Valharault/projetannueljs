@@ -4,7 +4,6 @@ import {Form} from "./src/lib/form.js";
 import {Counter} from "./src/lib/counter.js";
 import {Paragraph} from "./src/lib/paragraph.js";
 
-
 ReactDom.render(
     document.getElementById('root'),
     React.createElement('header', {class: ['d-flex', 'flex-column', 'flex-md-row', 'align-items-center', 'p-3', 'px-md-4', 'mb-3', 'bg-white', 'border-bottom', 'shadow-sm']}, [

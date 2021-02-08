@@ -17,10 +17,13 @@ export class Paragraph extends Component {
     };
 
     render() {
+        console.log(this.props)
         return React.createElement(
             "p",
-            {class: this.props.class},
-            this.props.text
+            {
+                class: this.props.class,
+                text: this.props.text
+            }
         )
     }
 }

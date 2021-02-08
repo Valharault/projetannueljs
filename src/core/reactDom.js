@@ -46,10 +46,13 @@ export const React = {
                             })
                             props[attribute] = className.substring(0, className.length - 1);
                         }
-                    } else if (attribute === "text") {
-                        element.innerHTML = props[attribute]
                     }
-                    element.setAttribute(attribute, props[attribute]);
+                    if (attribute === "text") {
+                        element.innerHTML = props[attribute]
+                    } else {
+                        element.setAttribute(attribute, props[attribute]);
+                    }
+
                 }
             }
             if (children !== null){
