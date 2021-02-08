@@ -16,18 +16,20 @@ export const Router = {
     },
 
     route(path) {
-        if (path.substring(1) === "inscription") {
-            this.cleanView(root);
-            ReactDom.render(
-                root,
-                React.createElement(RegisterView, {})
-            );
-        } else {
-            this.cleanView(root);
-            ReactDom.render(
-                root,
-                React.createElement(HomeView, {})
-            );
+        if (path !== null) {
+            if (path.substring(1) === "inscription") {
+                this.cleanView(root);
+                ReactDom.render(
+                    root,
+                    React.createElement(RegisterView, {})
+                );
+            } else {
+                this.cleanView(root);
+                ReactDom.render(
+                    root,
+                    React.createElement(HomeView, {})
+                );
+            }
         }
     },
 

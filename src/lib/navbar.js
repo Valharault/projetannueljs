@@ -20,7 +20,7 @@ export class Navbar extends Component {
 
 
     render() {
-        return React.createElement("nav", {class: this.props.class, id: this.props.id}, [
+        return React.createElement("nav", this.props, [
             React.createElement("a", {class: 'navbar-brand', href: ''}, ['Navbar']),
             React.createElement(Button, {class: 'navbar-toggler', type: 'button'}, [
                 React.createElement("span", {class: 'navbar-toggler-icon'})
