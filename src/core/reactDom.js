@@ -46,11 +46,11 @@ export const React = {
                     }
 
                     else if (attribute === "class") {
-                        let className = ""
+                        let className = "";
                         if (Array.isArray(props[attribute])) {
                             props[attribute].forEach(classN => {
                                 className = classN + ' ' + className
-                            })
+                            });
                             props[attribute] = className.substring(0, className.length - 1);
                         }
                     }
@@ -190,15 +190,16 @@ String.prototype.interpolate = function (props) {
     return subElement
 };
 
-function handleHref(attribute) {
-
-    console.log(window.location.href);
-    if (attribute != window.location.href) {
-        window.history.pushState({attribute}, `${attribute}`, `${attribute}`);
-        //trigger update components
+function handleHref(path) {
+    let root = document.getElementById('root');
+    window.history.pushState({attribute}, `${attribute}`, `${attribute}`);
+    if (path === "/home") {
+        return ReactDom.render(root, React.createElement(home))
+    } else if (path === '/features') {
+        return ReactDom.render(root, React.createElement(home))
+    } else if (path === '/projetannueljs') {
+        return ReactDom.render(index)
     }
-
-
 
 }
 
