@@ -1,3 +1,5 @@
+import {Router} from './router.js'
+
 export const ReactDom = {
     render(elementHtml, ...elementsReact) {
         elementsReact.forEach(elementReact => {
@@ -21,7 +23,6 @@ const allowedAttributes = [
 
 export const React = {
 
-
     /**
      * @param {String|ReactElement} tagOrElement
      * @param {object} props
@@ -41,11 +42,9 @@ export const React = {
                     } else if (attribute === 'href') {
                         element.addEventListener('click', function (e) {
                             e.preventDefault();
-                            handleHref(props[attribute]);
+                            Router.handleHref(props[attribute])
                         });
-                    }
-
-                    else if (attribute === "class") {
+                    } else if (attribute === "class") {
                         let className = ""
                         if (Array.isArray(props[attribute])) {
                             props[attribute].forEach(classN => {
@@ -190,25 +189,13 @@ String.prototype.interpolate = function (props) {
     return subElement
 };
 
-function handleHref(attribute) {
-
-    console.log(window.location.href);
-    if (attribute != window.location.href) {
-        window.history.pushState({attribute}, `${attribute}`, `${attribute}`);
-        //trigger update components
-    }
-
-
-
-}
-
 
 window.addEventListener("popstate", event => {
     // Grab the history state id
     let stateId = event.state;
 
     if (event.state != null) {
-            stateId = event.state.attribute
+        stateId = event.state.attribute
     }
     console.log(stateId);
 
