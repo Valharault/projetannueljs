@@ -6,13 +6,12 @@ export class Paragraph extends Component {
         super(props);
     }
 
-
     propTypes = {
         type: "object",
         properties: {
             class: {
                 type: "string",
-                enum: ["text-white", "text-dark", "p-2"]
+                enum: ["text-white", "text-dark", "p-2", "h5", "my-0", "fw-normal"]
             }
         }
     };

@@ -1,6 +1,6 @@
 import Component from '../core/component.js';
 import {React} from "../core/reactDom.js";
-import {ReactDom} from "../core/reactDom";
+import {ReactDom} from "../core/reactDom.js";
 
 export class Counter extends Component {
     constructor(props) {

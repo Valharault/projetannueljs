@@ -1,13 +1,13 @@
 import Component from '../core/component.js';
 import {React} from "../core/reactDom.js";
 import {Button} from "./button.js";
-import {Input} from "./Input.js";
+import {Input} from "./input.js";
+import {Label} from "./label.js";
 
 export class Form extends Component {
     constructor(props) {
         super(props);
     }
-
 
     propTypes = {
         type: "object",
@@ -19,16 +19,15 @@ export class Form extends Component {
         }
     };
 
-
     onSubmit = () => {
         alert('Voulez vous soumettre le valeur avec un email = ' + document.getElementById("mail").value)
     };
 
     render() {
         return React.createElement(
-            "form", {class: this.props.class, id: this.props.id}, [
+            "form", this.props, [
                 React.createElement('div', {class: 'mb-3'}, [
-                    React.createElement('label', {for: 'username', class: 'form-label', text: "Nom d'utilisateur :"}),
+                    React.createElement(Label, {for: 'username', class: 'form-label', text: "Nom d'utilisateur :"}),
                     React.createElement(Input, {
                         type: 'text',
                         id: 'username',
@@ -42,7 +41,7 @@ export class Form extends Component {
                     React.createElement(Input, {type: 'email', id: 'email', name: 'email', class: 'form-control'})
                 ]),
                 React.createElement('div', {class: 'mb-3'}, [
-                    React.createElement('label', {for: 'password', class: 'form-label', text: 'Mot de passe :'}),
+                    React.createElement(Label, {for: 'password', class: 'form-label', text: 'Mot de passe :'}),
                     React.createElement(Input, {
                         type: 'password',
                         id: 'password',
@@ -51,7 +50,7 @@ export class Form extends Component {
                     })
                 ]),
                 React.createElement('div', {class: 'mb-3'}, [
-                    React.createElement('label', {
+                    React.createElement(Label, {
                         for: 'password_confirm',
                         class: 'form-label',
                         text: 'Confirmer mot de passe :'
