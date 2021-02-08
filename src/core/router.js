@@ -8,7 +8,8 @@ const root = document.getElementById('root')
 export const Router = {
 
     handleHref(path) {
-        if (path !== window.location.href) {
+        let fullUrl = url + path
+        if (fullUrl !== window.location.href) {
             window.history.pushState({path}, `${path}`, url + `${path}`);
             this.route(path)
         }
