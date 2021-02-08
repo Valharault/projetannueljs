@@ -17,7 +17,6 @@ export class Paragraph extends Component {
     };
 
     render() {
-        console.log(this.props)
         return React.createElement(
             "p",
             {

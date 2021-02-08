@@ -4,7 +4,7 @@ import {Button} from "./button.js";
 import {Input} from "./input.js";
 import {Label} from "./label.js";
 
-export class Form extends Component {
+export class RegisterForm extends Component {
     constructor(props) {
         super(props);
     }

@@ -1,3 +1,5 @@
+import {Router} from './router.js'
+
 export const ReactDom = {
     render(elementHtml, ...elementsReact) {
         elementsReact.forEach(elementReact => {
@@ -21,7 +23,6 @@ const allowedAttributes = [
 
 export const React = {
 
-
     /**
      * @param {String|ReactElement} tagOrElement
      * @param {object} props
@@ -41,16 +42,14 @@ export const React = {
                     } else if (attribute === 'href') {
                         element.addEventListener('click', function (e) {
                             e.preventDefault();
-                            handleHref(props[attribute]);
+                            Router.handleHref(props[attribute])
                         });
-                    }
-
-                    else if (attribute === "class") {
-                        let className = "";
+                    } else if (attribute === "class") {
+                        let className = ""
                         if (Array.isArray(props[attribute])) {
                             props[attribute].forEach(classN => {
                                 className = classN + ' ' + className
-                            });
+                            })
                             props[attribute] = className.substring(0, className.length - 1);
                         }
                     }
@@ -190,26 +189,13 @@ String.prototype.interpolate = function (props) {
     return subElement
 };
 
-function handleHref(path) {
-    let root = document.getElementById('root');
-    window.history.pushState({attribute}, `${attribute}`, `${attribute}`);
-    if (path === "/home") {
-        return ReactDom.render(root, React.createElement(home))
-    } else if (path === '/features') {
-        return ReactDom.render(root, React.createElement(home))
-    } else if (path === '/projetannueljs') {
-        return ReactDom.render(index)
-    }
-
-}
-
 
 window.addEventListener("popstate", event => {
     // Grab the history state id
     let stateId = event.state;
 
     if (event.state != null) {
-            stateId = event.state.attribute
+        stateId = event.state.attribute
     }
     console.log(stateId);
 
