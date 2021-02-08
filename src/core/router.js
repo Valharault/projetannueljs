@@ -3,12 +3,12 @@ import {HomeView} from "../view/home.js";
 import {RegisterView} from "../view/register.js";
 
 const url = window.location.origin + '/projetAnnuelJs/';
-const root = document.getElementById('root')
+const root = document.getElementById('root');
 
 export const Router = {
 
     handleHref(path) {
-        let fullUrl = url + path
+        let fullUrl = url + path;
         if (fullUrl !== window.location.href) {
             window.history.pushState({path}, `${path}`, url + `${path}`);
             this.route(path)
@@ -17,13 +17,13 @@ export const Router = {
 
     route(path) {
         if (path.substring(1) === "inscription") {
-            this.cleanView(root)
+            this.cleanView(root);
             ReactDom.render(
                 root,
                 React.createElement(RegisterView, {})
             );
         } else {
-            this.cleanView(root)
+            this.cleanView(root);
             ReactDom.render(
                 root,
                 React.createElement(HomeView, {})
@@ -36,4 +36,4 @@ export const Router = {
             root.removeChild(root.lastChild);
         }
     }
-}
+};

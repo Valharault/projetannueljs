@@ -189,15 +189,3 @@ String.prototype.interpolate = function (props) {
     return subElement
 };
 
-
-window.addEventListener("popstate", event => {
-    // Grab the history state id
-    let stateId = event.state;
-
-    if (event.state != null) {
-        stateId = event.state.attribute
-    }
-    console.log(stateId);
-
-
-});
