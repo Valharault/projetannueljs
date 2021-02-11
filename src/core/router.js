@@ -1,6 +1,7 @@
 import {React, ReactDom} from './reactDom.js';
 import {HomeView} from "../view/home.js";
 import {RegisterView} from "../view/register.js";
+import {UserView} from "../view/user";
 
 const url = window.location.origin + '/projetAnnuelJs/';
 const root = document.getElementById('root');
@@ -15,21 +16,26 @@ export const Router = {
         }
     },
 
+
     route(path) {
-        if (path !== null) {
-            if (path.substring(1) === "inscription") {
-                this.cleanView(root);
-                ReactDom.render(
-                    root,
-                    React.createElement(RegisterView, {})
-                );
-            } else {
-                this.cleanView(root);
-                ReactDom.render(
-                    root,
-                    React.createElement(HomeView, {})
-                );
-            }
+        if (path.substring(1) === "inscription") {
+            this.cleanView(root);
+            ReactDom.render(
+                root,
+                React.createElement(RegisterView, {})
+            );
+        } else if (path.substring(1) === "profil") {
+            this.cleanView(root);
+            ReactDom.render(
+                root,
+                React.createElement(UserView, {})
+            );
+        } else {
+            this.cleanView(root);
+            ReactDom.render(
+                root,
+                React.createElement(HomeView, {})
+            );
         }
     },
 

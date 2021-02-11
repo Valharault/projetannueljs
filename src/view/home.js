@@ -6,6 +6,7 @@ import Component from "../core/component.js";
 export class HomeView extends Component {
 
     render() {
+
         return React.createElement('body', {class: 'bg-light'}, [
             React.createElement('header', {class: ['d-flex', 'flex-column', 'flex-md-row', 'align-items-center', 'p-3', 'px-md-4', 'mb-3', 'bg-white', 'border-bottom', 'shadow-sm']}, [
                 React.createElement(Navbar, {class: ['my-2', 'my-md-0', 'me-md-3', 'navbar', 'navbar-expand-lg', 'navbar-light', 'me-md-auto']}),
@@ -13,7 +14,7 @@ export class HomeView extends Component {
             ]),
             React.createElement('div', {class: 'container'}, [
                 React.createElement('div', {class: 'row'}, [
-                    React.createElement('h1', {text: 'Salut à tous'}, null)
+                    React.createElement('h1', {text: 'Accueil'}, null)
                 ])
             ])
         ])
