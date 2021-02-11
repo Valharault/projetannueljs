@@ -6,6 +6,7 @@ import {HomeView} from "./src/view/home";
 Router.route(window.location.search);
 
 
+
 window.addEventListener("popstate", event => {
     // Grab the history state id
     let stateId = event.state;

@@ -19,8 +19,11 @@ export class RegisterForm extends Component {
         }
     };
 
-    onSubmit = () => {
-        alert('Voulez vous soumettre le valeur avec un email = ' + document.getElementById("mail").value)
+    onSubmit() {
+        localStorage.setItem('username', document.getElementById('username').value);
+        localStorage.setItem('email', document.getElementById('email').value);
+        localStorage.setItem('password', document.getElementById('password').value);
+        localStorage.setItem('password', document.getElementById('password-confirm').value);
     };
 
     render() {
@@ -62,7 +65,7 @@ export class RegisterForm extends Component {
                         class: 'form-control'
                     })
                 ]),
-                React.createElement(Button, {class: ['btn', 'btn-success'], type: 'submit', text: 'Envoyer'})
+                React.createElement(Button, {class: ['btn', 'btn-success'], type: 'submit', text: 'Envoyer', onClick : this.onSubmit })
             ]
         )
     }

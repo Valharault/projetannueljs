@@ -18,7 +18,7 @@ const allowedAttributes = [
     'href',
     'text',
     'value',
-    'placeholder'
+    'placeholder',
 ]
 
 export const React = {
@@ -36,7 +36,10 @@ export const React = {
             for (let attribute in props) {
                 if (allowedAttributes.includes(attribute)) {
                     if (attribute === "onClick") {
-                        element.addEventListener('click', props[attribute]);
+                        console.log(props[attribute]);
+                        element.addEventListener('click', function (e) {
+                            props[attribute]();
+                        });
                     } else if (attribute === "onSubmit") {
                         element.addEventListener('submit', props[attribute]);
                     } else if (attribute === 'href') {
@@ -188,4 +191,6 @@ String.prototype.interpolate = function (props) {
     }
     return subElement
 };
+
+
 
